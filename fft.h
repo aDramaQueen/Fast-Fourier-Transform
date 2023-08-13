@@ -47,7 +47,6 @@ enum FFTAlgorithm {
 };
 
 static const bool CHECK_ARGUMENTS = true;
-static const bool PRINT_REVERSE_INDEXES = false;
 static const enum BitSignificance SIGNIFICANCE = MSB;
 
 /**
