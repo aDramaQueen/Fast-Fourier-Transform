@@ -21,7 +21,7 @@ I tried to be as readable as possible. Meaning, lots of documentation & comments
 
 ## Excerpt from test results
 
-These test ran on a machine with following stats:
+These tests ran on a machine with following stats:
 - Intel(R) Core(TM) i5-5675C CPU @ 3.10GHz
 - 16 GB Ram
 
