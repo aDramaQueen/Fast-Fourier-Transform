@@ -192,6 +192,9 @@ void deleteFFTResult(struct FFTResult* result);
 /**
  * Executes FFT with desired algorithm
  * 
+ * NOTE: Use this convenient function call only if you're allowed to place more complex data structures on the stack without any problems.
+ *       If you are not allowed to do this, you should call the individual FFT functions directly, with pre-initialized arrays.
+ * 
  * @param algorithm Algorithm of choice
  * @param data Samples/Data array of size 'size'
  * @param size Number of samples/data points
@@ -201,6 +204,9 @@ struct FFTResult* fft(enum FFTAlgorithm algorithm, const float complex* data, si
 
 /**
  * Executes inverse FFT with desired algorithm
+ * 
+ * NOTE: Use this convenient function call only if you're allowed to place more complex data structures on the stack without any problems.
+ *       If you are not allowed to do this, you should call the individual FFT functions directly, with pre-initialized arrays.
  * 
  * @param algorithm Algorithm of choice
  * @param data Samples/Data array of size 'size'

@@ -66,60 +66,6 @@ static inline float complex calcInverse(size_t size, bool withSize) {
     return -1.0f * calcForward(size, withSize);
 }
 
-/*
-static void printBinaryRepresentation(size_t number, bool reversed) {
-    char bits[33];
-    bits[32] = 0; // Zero terminator
-    size_t index = 0;
-    for (size_t k = 31; k > 0; k--) {
-        bits[index++] = (number & (1 << k)) ? '1' : '0';
-    }
-    bits[31] = (number & 1) ? '1' : '0';
-    if(reversed) {
-        printf("REVERSED: %10zu = %s\n", number, bits);
-    } else {
-        printf("ORIGINAL: %10zu = %s\n", number, bits);
-    }
-}
-*/
-
-/**
- * Reverses bits of given 32 bit number within a given max bit size.
- * This bit reversal within a given range is necessary for the Cooley-Tukey FFT algorithm.
- * 
- * Example for max bit size = 7 (means max number = 0111 1111 = 127):
- *      number   = 13 = 0000 0000 0000 0000 0000 0000 0000 1101
- *      reversed = 88 = 0000 0000 0000 0000 0000 0000 0101 1000
- * Without the range boundary you would get:
- *      number   =         13 = 0000 0000 0000 0000 0000 0000 0000 1101
- *      reversed = 2952790016 = 1011 0000 0000 0000 0000 0000 0000 0000
- * 
- * @param number Number which should be reversed
- * @param highestBit Highest bit that marks the boundary for the reversal operation
- * @return Bit reversed version of given number within given highest bit range
- */
-/*
-static size_t reverseBits(size_t number, uint8_t highestBit) {
-    if(DEBUG && highestBit > 31) {
-        printf("This function has a maximum bit range of 32");
-        return 0;
-    }
-    size_t reversed = 0;
-    if(PRINT_REVERSE_INDEXES) {
-        printBinaryRepresentation(number, false);
-        for(uint8_t i = 0; i < 32; i++){
-            reversed |= ((number >> highestBit+i) & 1) << (31 - i);
-        }
-        printBinaryRepresentation(reversed, true);
-    } else {
-        for(uint8_t i = 0; i < 32; i++){
-            reversed |= ((number >> highestBit+i) & 1) << (31 - i);
-        }
-    }
-    return reversed;
-}
-*/
-
 /**
  * Returns highest bit position for given 32 bit integer with desired bit significance.
  * Example for 37 = 0010 0101:
@@ -364,10 +310,10 @@ static void bitReverseCopy(const float complex* dataIN, float complex* dataOUT, 
 /**
  * Cooley-Tukey FFT with iterative algorithm
  * 
- * @param dataIN 
- * @param dataOUT 
- * @param size 
- * @param coefficient 
+ * @param dataIN Array with data
+ * @param dataOUT Array that will hold the transformed data afterwards
+ * @param size Size of given arrays
+ * @param coefficient Precalculated unity root coefficiant
  * @see https://en.wikipedia.org/wiki/Cooley%E2%80%93Tukey_FFT_algorithm#Data_reordering,_bit_reversal,_and_in-place_algorithms
  */
 static void _fftCooleyTukeyIterative(const float complex* dataIN, float complex* dataOUT, const size_t size, const float complex coefficient) {
