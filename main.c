@@ -1,5 +1,6 @@
 #ifdef _WIN32
-// If you're running on Windows don't use MinGW stdin/stdout !!!
+// If you're running on Windows don't use MinGW stdin/stdout !!! These originate
+// for C99/GNU99 compatibility. This application should be built with at least C11.
 #define __USE_MINGW_ANSI_STDIO 0
 #else
 #define _WIN32 0
